@@ -1,0 +1,45 @@
+<!-- This example requires Tailwind CSS v2.0+ -->
+<div class="relative bg-white">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6">
+    <div
+      class="
+        flex
+        justify-between
+        items-center
+        border-b-2 border-gray-100
+        py-6
+        md:justify-start md:space-x-10
+      "
+    >
+      <div class="flex justify-start lg:w-0 lg:flex-1">
+        <a [routerLink]="['/']">
+          <span class="sr-only">Workflow</span>
+          <img
+            class="h-10 w-auto sm:h-10"
+            src="../../assets/img/generic-electric-logo.png"
+            alt="logo"
+          />
+        </a>
+      </div>
+
+      <nav class="items-center">
+        <div class="relative">
+          <!-- Item active: "text-gray-900", Item inactive: "text-gray-500" -->
+
+          <a
+            [routerLink]="['/employee-list']"
+            class="text-base font-medium text-gray-500 hover:text-gray-900"
+          >
+            Employee List
+          </a>
+          <a
+            [routerLink]="['employee']"
+            class="text-base font-medium ml-5 text-gray-500 hover:text-gray-900"
+          >
+            Add New Employee
+          </a>
+        </div>
+      </nav>
+    </div>
+  </div>
+</div>

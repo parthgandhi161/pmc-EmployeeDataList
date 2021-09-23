@@ -1,5 +1,6 @@
 <div class="mx-10 mt-5">
-  <div class="flex flex-col">
+  <div class="text-center mt-64" *ngIf="datalen == 0">Please Add Employee.</div>
+  <div class="flex flex-col" *ngIf="datalen == 1">
     <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
       <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
         <div
@@ -66,7 +67,7 @@
                     <div class="flex-shrink-0 h-10 w-10">
                       <img
                         class="h-10 w-10 rounded-full"
-                        src="../../assets/img/empics.jfif"
+                        src="./assets/img/employee.jpg"
                         alt=""
                       />
                     </div>
@@ -101,7 +102,7 @@
                 >
                   <a
                     [routerLink]="['/employee']"
-                    [queryParams]="{ id: emp.employeeid }"
+                    [queryParams]="{ id: emp.id }"
                     class="text-indigo-600 hover:text-indigo-900"
                     >Edit</a
                   >

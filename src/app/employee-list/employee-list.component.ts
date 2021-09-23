@@ -11,6 +11,7 @@ export class EmployeeListComponent implements OnInit {
   deledata: any = [];
   deletedata: any;
   firstdata: any;
+  datalen: any;
 
   constructor(
     private _route: ActivatedRoute,
@@ -18,15 +19,13 @@ export class EmployeeListComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // localStorage.setItem(
-    //   'data',
-    //   JSON.stringify(this._employees.getEmployees())
-    // );
     this.firstdata = localStorage.getItem('data');
-    if (this.firstdata == null) {
+    if (this.firstdata == '[]' || this.firstdata == null) {
       this.employees = [];
+      this.datalen = 0;
     } else {
       this.employees = JSON.parse(this.firstdata);
+      this.datalen = 1;
     }
   }
 

@@ -24,6 +24,8 @@ export class AddEmployeeComponent implements OnInit {
 
   inidata: any;
   initial: any;
+  result: any;
+  index: any;
 
   employees: any = [];
   firstdata: any;
@@ -38,13 +40,25 @@ export class AddEmployeeComponent implements OnInit {
         this.id = 0;
       }
     });
-
     if (this.id != 0) {
       this.inidata = localStorage.getItem('data');
       if (this.inidata == null) {
         this.initial = [];
       } else {
-        this.initial = this.inidata;
+        this.initial = JSON.parse(this.inidata);
+        this.result = this.initial.find((obj: any) => {
+          return obj.id == this.id;
+        });
+      }
+
+      if (this.result == undefined) {
+        alert('Employee Not Found');
+        this._router.navigate(['/employee-list']);
+      } else {
+        this.employeename = this.result.EmployeeName;
+        this.contact = this.result.ContactNo;
+        this.email = this.result.Email;
+        this.department = this.result.Department;
       }
     }
   }
@@ -57,24 +71,42 @@ export class AddEmployeeComponent implements OnInit {
       this.employees = JSON.parse(this.firstdata);
     }
 
-    if (this.employees[this.employees.length - 1] == undefined) {
-      this.finalid = 1;
-    } else {
-      this.finalid = this.employees[this.employees.length - 1].id + 1;
-    }
-    console.log(this.finalid);
-    this.updatedata = {
-      id: this.finalid,
-      EmployeeName: form.value.EmployeeName,
-      Email: form.value.Email,
-      ContactNo: form.value.ContactNo,
-      Department: form.value.Department,
-    };
+    if (this.id == 0) {
+      if (this.employees[this.employees.length - 1] == undefined) {
+        this.finalid = 1;
+      } else {
+        this.finalid = this.employees[this.employees.length - 1].id + 1;
+      }
+      console.log(this.finalid);
+      this.updatedata = {
+        id: this.finalid,
+        EmployeeName: form.value.EmployeeName,
+        Email: form.value.Email,
+        ContactNo: form.value.ContactNo,
+        Department: form.value.Department,
+      };
 
-    this.employees.push(this.updatedata);
-    localStorage.setItem('data', JSON.stringify(this.employees));
-    alert('Success');
-    this._router.navigate(['/product-list']);
+      this.employees.push(this.updatedata);
+      localStorage.setItem('data', JSON.stringify(this.employees));
+      alert('Success');
+      this._router.navigate(['/employee-list']);
+    } else {
+      this.index = this.employees.findIndex((obj: any) => obj.id == this.id);
+      this.employees.splice(this.index, 1);
+      console.log(this.employees);
+      this.updatedata = {
+        id: this.id,
+        EmployeeName: form.value.EmployeeName,
+        Email: form.value.Email,
+        ContactNo: form.value.ContactNo,
+        Department: form.value.Department,
+      };
+      console.log(this.updatedata);
+      this.employees.splice(this.index, 0, this.updatedata);
+      localStorage.setItem('data', JSON.stringify(this.employees));
+      alert('updated');
+      this._router.navigate(['/employee-list']);
+    }
   }
 
   reset(form: NgForm) {

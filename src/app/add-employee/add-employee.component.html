@@ -89,6 +89,7 @@
           focus:outline-none focus:shadow-outline
         "
         required
+        value="{{ inputfields.con }}"
         id="username"
         type="text"
         placeholder="Contact No."
@@ -170,8 +171,8 @@
     <div class="flex items-center mt-5 justify-between">
       <button
         class="
-          bg-blue-500
-          hover:bg-blue-700
+          bg-gray-500
+          hover:bg-gray-900
           text-white
           font-bold
           py-2
@@ -182,13 +183,13 @@
         type="submit"
         [disabled]="EmployeeRegestration.invalid"
       >
-        save
+        {{ id != 0 ? "Update" : "save" }}
       </button>
       <div class="flex items-center justify-between">
         <button
           class="
-            bg-blue-500
-            hover:bg-blue-700
+            bg-gray-500
+            hover:bg-gray-900
             text-white
             font-bold
             py-2

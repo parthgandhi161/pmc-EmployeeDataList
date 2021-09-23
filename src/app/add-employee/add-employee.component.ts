@@ -15,6 +15,16 @@ export class AddEmployeeComponent implements OnInit {
   updatedata: any;
   finalid: any;
 
+  inputfields: any = {
+    ename: '',
+    con: '',
+    mail: '',
+    dep: '',
+  };
+
+  inidata: any;
+  initial: any;
+
   employees: any = [];
   firstdata: any;
 
@@ -28,6 +38,15 @@ export class AddEmployeeComponent implements OnInit {
         this.id = 0;
       }
     });
+
+    if (this.id != 0) {
+      this.inidata = localStorage.getItem('data');
+      if (this.inidata == null) {
+        this.initial = [];
+      } else {
+        this.initial = this.inidata;
+      }
+    }
   }
 
   onSubmit(form: NgForm) {
